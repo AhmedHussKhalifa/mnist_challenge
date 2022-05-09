@@ -1,0 +1,4 @@
+model_checkpoint_path: "checkpoint-58200"
+all_model_checkpoint_paths: "checkpoint-57600"
+all_model_checkpoint_paths: "checkpoint-57900"
+all_model_checkpoint_paths: "checkpoint-58200"

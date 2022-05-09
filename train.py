@@ -11,14 +11,10 @@ import shutil
 from timeit import default_timer as timer
 
 import tensorflow as tf
-# import tensorflow.compat.v1 as tf
-
-# tf.disable_v2_behavior()
-
 import numpy as np
 from tensorflow.examples.tutorials.mnist import input_data
 
-from model_train import Model
+from model import Model
 from pgd_attack import LinfPGDAttack
 
 with open('config.json') as config_file:
@@ -71,13 +67,7 @@ tf.summary.image('images adv train', model.x_image)
 merged_summaries = tf.summary.merge_all()
 
 shutil.copy('config.json', model_dir)
-large_num_of_attacks = config['large_num_of_attacks']
 
-
-# if tf.test.gpu_device_name():
-#   print('Default GPU Device: {}'.format(tf.test.gpu_device_name()))
-
-# exit(0)
 with tf.Session() as sess:
   # Initialize the summary writer, global variables, and our time counter.
   summary_writer = tf.summary.FileWriter(model_dir, sess.graph)

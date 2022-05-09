@@ -1,6 +1,6 @@
 {
   "_comment": "===== MODEL CONFIGURATION =====",
-  "model_dir": "models/secret",
+  "model_dir": "models/natural",
 
   "_comment": "===== TRAINING CONFIGURATION =====",
   "random_seed": 4557077,
