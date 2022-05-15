@@ -93,21 +93,22 @@ with tf.Session() as sess:
     nat_dict = {model.x_input: x_batch,
                 model.y_input: y_batch}
 
-    for rep in range(large_num_of_attacks):
-      # Compute Adversarial Perturbations
-      start = timer()
-      # x_batch_adv = attack_yang.perturb(x_batch)
-      x_batch_adv = attack_yang.perturb(x_batch)
-      print(x_batch_adv)
-      exit(0)
-
-      end = timer()
-      training_time += end - start
-      adv_dict = {model.x_input: x_batch_adv,
-                  model.y_input: y_batch}
-      adv_acc = sess.run(model.accuracy, feed_dict=adv_dict)
-
     
+    # Compute Adversarial Perturbations
+    start = timer()
+    # x_batch_adv = attack_yang.perturb(x_batch)
+
+    x_batch_adv, y_batch = attack_yang.perturb(x_batch, y_batch, large_num_of_attacks)
+    print(np.shape(x_batch_adv)) # (5000, 784)
+    print(np.shape(y_batch)) # (5000)
+    exit(0)
+
+    end = timer()
+    training_time += end - start
+    adv_dict = {model.x_input: x_batch_adv,
+                model.y_input: y_batch}
+    adv_acc = sess.run(model.accuracy, feed_dict=adv_dict)
+
     # Output to stdout
     if ii % num_output_steps == 0:
       nat_acc = sess.run(model.accuracy, feed_dict=nat_dict)

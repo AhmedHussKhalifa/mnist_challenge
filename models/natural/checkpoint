@@ -1,4 +1,4 @@
-model_checkpoint_path: "checkpoint-8700"
-all_model_checkpoint_paths: "checkpoint-8100"
-all_model_checkpoint_paths: "checkpoint-8400"
+model_checkpoint_path: "checkpoint-9300"
 all_model_checkpoint_paths: "checkpoint-8700"
+all_model_checkpoint_paths: "checkpoint-9000"
+all_model_checkpoint_paths: "checkpoint-9300"

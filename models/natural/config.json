@@ -13,7 +13,7 @@
   "_comment": "===== EVAL CONFIGURATION =====",
   "num_eval_examples": 10000,
   "eval_batch_size": 200,
-  "eval_on_cpu": true,
+  "eval_on_cpu": false,
 
   "_comment": "=====ADVERSARIAL EXAMPLES CONFIGURATION=====",
   "epsilon": 0.3,
