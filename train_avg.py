@@ -19,7 +19,7 @@ import numpy as np
 from tensorflow.examples.tutorials.mnist import input_data
 
 from model_train import Model
-from pgd_attack import LinfPGDAttack
+from pgd_attack import LinfPGDAttack, YangAttack
 
 with open('config.json') as config_file:
     config = json.load(config_file)
@@ -50,6 +50,11 @@ attack = LinfPGDAttack(model,
                        config['a'],
                        config['random_start'],
                        config['loss_func'])
+
+model = Model()
+attack_yang = YangAttack(model, config['epsilon'], config['k'],config['a'],
+                       config['random_start'],
+                          config['loss_func'])
 
 # Setting up the Tensorboard and checkpoint outputs
 model_dir = config['model_dir']
@@ -88,30 +93,37 @@ with tf.Session() as sess:
   for ii in range(max_num_training_steps):
     x_batch, y_batch = mnist.train.next_batch(batch_size)
 
-    for rep in range(large_num_of_attacks):
-      # Compute Adversarial Perturbations
-      start = timer()
-      x_batch_adv = attack.perturb(x_batch, y_batch, sess)
-      end = timer()
-      training_time += end - start
-      adv_dict = {model.x_input: x_batch_adv,
-                  model.y_input: y_batch}
-      adv_acc = sess.run(model.accuracy, feed_dict=adv_dict)
-
-    
     nat_dict = {model.x_input: x_batch,
                 model.y_input: y_batch}
+
+    
+    # Compute Adversarial Perturbations
+    start = timer()
+    # x_batch_adv = attack_yang.perturb(x_batch)
+  
+    x_batch_adv, y_batch = attack_yang.perturb(x_batch, y_batch,sess,  large_num_of_attacks)
+    print(np.shape(x_batch_adv)) # (5000, 784)
+    print(np.shape(y_batch)) # (5000)
+    exit(0)
+
+    end = timer()
+    training_time += end - start
+    adv_dict = {model.x_input: x_batch_adv,
+                model.y_input: y_batch}
+    adv_acc = sess.run(model.accuracy, feed_dict=adv_dict)
+
     # Output to stdout
     if ii % num_output_steps == 0:
       nat_acc = sess.run(model.accuracy, feed_dict=nat_dict)
       adv_acc = sess.run(model.accuracy, feed_dict=adv_dict)
-    print('Step {}:    ({})'.format(ii, datetime.now()))
-    print('    training nat accuracy {:.4}%'.format(nat_acc * 100))
-    print('    training adv accuracy {:.4}%'.format(adv_acc * 100))
-    if ii != 0:
-      print('    {} examples per second'.format(
-          num_output_steps * batch_size / training_time))
-      training_time = 0.0
+      print('Step {}:    ({})'.format(ii, datetime.now()))
+      print('    training nat accuracy {:.4}%'.format(nat_acc * 100))
+      print('    training adv accuracy {:.4}%'.format(adv_acc * 100))
+      
+      if ii != 0:
+        print('    {} examples per second'.format(
+            num_output_steps * batch_size / training_time))
+        training_time = 0.0
 
     # Tensorboard summaries
     if ii % num_summary_steps == 0:
