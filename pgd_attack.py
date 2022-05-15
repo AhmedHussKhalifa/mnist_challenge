@@ -60,6 +60,24 @@ class LinfPGDAttack:
 
     return x
 
+class YangAttack:
+  def __init__(self, epsilon):
+    """Attack parameter initialization. The attack performs k steps of
+       size a, while always staying within epsilon from the initial
+       point."""
+    self.epsilon = epsilon
+
+
+  def perturb(self, x_nat):
+    """Given a set of examples (x_nat, y), returns a set of adversarial
+       examples within epsilon of x_nat in l_infinity norm."""
+
+    x = x_nat + np.random.uniform(-self.epsilon, self.epsilon, x_nat.shape)
+    x = np.clip(x, 0, 1) # ensure valid pixel range
+
+
+    return x
+
 
 if __name__ == '__main__':
   import json
