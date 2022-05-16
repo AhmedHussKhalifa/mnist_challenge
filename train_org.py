@@ -66,7 +66,7 @@ tf.summary.scalar('xent adv', model.xent / batch_size)
 tf.summary.image('images adv train', model.x_image)
 merged_summaries = tf.summary.merge_all()
 
-shutil.copy('config.json', model_dir)
+shutil.copy('config_org.json', model_dir)
 
 # if tf.test.gpu_device_name():
 #   print('Default GPU Device: {}'.format(tf.test.gpu_device_name()))

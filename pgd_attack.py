@@ -68,16 +68,30 @@ class YangAttack:
     self.epsilon = epsilon
 
 
-  def perturb(self, x_nat, y_batch, large_num_of_attacks):
+  def perturb_old(self, x_nat, y_batch, large_num_of_attacks):
     """Given a set of examples (x_nat, y), returns a set of adversarial
        examples within epsilon of x_nat in l_infinity norm."""
+    # for rep in range(large_num_of_attacks):
+    # Sagar part
+    x = x_nat + np.random.uniform(-self.epsilon, self.epsilon, x_nat.shape)
+    x = np.clip(x, 0, 1) # ensure valid pixel range
+
+
+    return x, y_batch
+
+  def perturb(self, x_nat, y, large_num_of_attacks):
+    # x_res = np.array([])
+    # y_res = np.array([])
+    x_res =  np.empty((50, 784), int)
+    y_res =np.empty((50, ), int)
     for rep in range(large_num_of_attacks):
       # Sagar part
       x = x_nat + np.random.uniform(-self.epsilon, self.epsilon, x_nat.shape)
       x = np.clip(x, 0, 1) # ensure valid pixel range
-
-
-    return x
+      x_res = np.concatenate((x_res, x), axis = 0)
+      y_res = np.concatenate((y_res, y), axis = 0)
+      
+    return x_res[50:], y_res[50:]
 
 
 if __name__ == '__main__':

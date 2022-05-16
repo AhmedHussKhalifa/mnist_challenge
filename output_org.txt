@@ -1,0 +1,254 @@
+Step 0:    (2022-05-15 18:38:39.163027)
+    training nat accuracy 16.0%
+    training adv accuracy 0.0%
+Step 100:    (2022-05-15 18:41:37.117886)
+    training nat accuracy 58.0%
+    training adv accuracy 0.0%
+    28.021355237293495 examples per second
+Step 200:    (2022-05-15 18:43:35.364864)
+    training nat accuracy 70.0%
+    training adv accuracy 0.0%
+    42.29611245099839 examples per second
+Step 300:    (2022-05-15 18:45:16.814300)
+    training nat accuracy 82.0%
+    training adv accuracy 0.0%
+    49.29927088632745 examples per second
+Step 400:    (2022-05-15 18:47:57.160764)
+    training nat accuracy 74.0%
+    training adv accuracy 0.0%
+    31.20420576592523 examples per second
+Step 500:    (2022-05-15 18:49:51.617935)
+    training nat accuracy 80.0%
+    training adv accuracy 0.0%
+    43.699233262644825 examples per second
+Step 600:    (2022-05-15 18:51:29.154613)
+    training nat accuracy 70.0%
+    training adv accuracy 0.0%
+    51.27733520853483 examples per second
+Step 700:    (2022-05-15 18:54:19.064083)
+    training nat accuracy 88.0%
+    training adv accuracy 2.0%
+    29.445417952020527 examples per second
+Step 800:    (2022-05-15 18:56:12.289117)
+    training nat accuracy 66.0%
+    training adv accuracy 0.0%
+    44.17162139844072 examples per second
+Step 900:    (2022-05-15 18:57:51.642347)
+    training nat accuracy 76.0%
+    training adv accuracy 0.0%
+    50.33854264452777 examples per second
+WARNING:tensorflow:From /home/h2amer/work/workspace/min-max/min-max-gpu/lib/python3.7/site-packages/tensorflow_core/python/training/saver.py:963: remove_checkpoint (from tensorflow.python.training.checkpoint_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file APIs to delete files with this prefix.
+Step 1000:    (2022-05-15 19:00:46.152815)
+    training nat accuracy 76.0%
+    training adv accuracy 2.0%
+    28.67074801558529 examples per second
+Step 1100:    (2022-05-15 19:02:42.975547)
+    training nat accuracy 76.0%
+    training adv accuracy 6.0%
+    42.840229395930436 examples per second
+Step 1200:    (2022-05-15 19:04:19.363944)
+    training nat accuracy 86.0%
+    training adv accuracy 12.0%
+    51.88709731212918 examples per second
+Step 1300:    (2022-05-15 19:07:08.694287)
+    training nat accuracy 78.0%
+    training adv accuracy 2.0%
+    29.556272657371537 examples per second
+Step 1400:    (2022-05-15 19:08:54.222640)
+    training nat accuracy 74.0%
+    training adv accuracy 14.0%
+    47.40027303860313 examples per second
+Step 1500:    (2022-05-15 19:10:34.137047)
+    training nat accuracy 64.0%
+    training adv accuracy 20.0%
+    50.05449511018185 examples per second
+Step 1600:    (2022-05-15 19:13:26.002495)
+    training nat accuracy 74.0%
+    training adv accuracy 18.0%
+    29.111065546563275 examples per second
+Step 1700:    (2022-05-15 19:15:14.403929)
+    training nat accuracy 70.0%
+    training adv accuracy 18.0%
+    46.13730003102691 examples per second
+Step 1800:    (2022-05-15 19:16:50.204721)
+    training nat accuracy 62.0%
+    training adv accuracy 22.0%
+    52.2072929006502 examples per second
+Step 1900:    (2022-05-15 19:19:37.333136)
+    training nat accuracy 62.0%
+    training adv accuracy 18.0%
+    29.94343025784507 examples per second
+Step 2000:    (2022-05-15 19:21:22.984232)
+    training nat accuracy 66.0%
+    training adv accuracy 22.0%
+    47.3446987963553 examples per second
+Step 2100:    (2022-05-15 19:22:58.222544)
+    training nat accuracy 74.0%
+    training adv accuracy 14.0%
+    52.514428124646955 examples per second
+Step 2200:    (2022-05-15 19:25:50.666116)
+    training nat accuracy 72.0%
+    training adv accuracy 24.0%
+    29.03850839711335 examples per second
+Step 2300:    (2022-05-15 19:27:38.737858)
+    training nat accuracy 74.0%
+    training adv accuracy 30.0%
+    46.29424827589354 examples per second
+Step 2400:    (2022-05-15 19:29:14.489716)
+    training nat accuracy 64.0%
+    training adv accuracy 2.0%
+    52.23309640353198 examples per second
+Step 2500:    (2022-05-15 19:32:19.763869)
+    training nat accuracy 72.0%
+    training adv accuracy 30.0%
+    27.00412381141555 examples per second
+Step 2600:    (2022-05-15 19:34:14.670166)
+    training nat accuracy 84.0%
+    training adv accuracy 26.0%
+    43.52671049321153 examples per second
+Step 2700:    (2022-05-15 19:35:52.415333)
+    training nat accuracy 82.0%
+    training adv accuracy 38.0%
+    51.16804233457501 examples per second
+Step 2800:    (2022-05-15 19:38:36.907217)
+    training nat accuracy 54.0%
+    training adv accuracy 12.0%
+    30.423913309836852 examples per second
+Step 2900:    (2022-05-15 19:40:28.700241)
+    training nat accuracy 82.0%
+    training adv accuracy 28.0%
+    44.74278602910059 examples per second
+Step 3000:    (2022-05-15 19:42:04.820863)
+    training nat accuracy 88.0%
+    training adv accuracy 28.0%
+    52.03356206602954 examples per second
+Step 3100:    (2022-05-15 19:45:17.727934)
+    training nat accuracy 80.0%
+    training adv accuracy 22.0%
+    25.94386288619125 examples per second
+Step 3200:    (2022-05-15 19:47:08.661358)
+    training nat accuracy 76.0%
+    training adv accuracy 24.0%
+    45.09837588189069 examples per second
+Step 3300:    (2022-05-15 19:48:46.494264)
+    training nat accuracy 74.0%
+    training adv accuracy 22.0%
+    51.14697791685955 examples per second
+Step 3400:    (2022-05-15 19:51:35.088519)
+    training nat accuracy 88.0%
+    training adv accuracy 28.0%
+    29.67788790633234 examples per second
+Step 3500:    (2022-05-15 19:53:26.257488)
+    training nat accuracy 76.0%
+    training adv accuracy 34.0%
+    44.98911842257544 examples per second
+Step 3600:    (2022-05-15 19:55:05.305877)
+    training nat accuracy 76.0%
+    training adv accuracy 22.0%
+    
+    
+ Eval output
+ 
+ 
+ natural: 10.65%
+adversarial: 0.00%
+avg nat loss: 8.6276
+avg adv loss: 29.2776
+Waiting for the next checkpoint ...   (2022-05-15 18:42:12.178236)   ..................
+Checkpoint models_org/natural/checkpoint-300, evaluating ...   (2022-05-15 18:45:22.440330)
+2022-05-15 18:45:22.441055: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-05-15 18:45:22.441108: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      
+natural: 73.06%
+adversarial: 0.00%
+avg nat loss: 1.3175
+avg adv loss: 5.3969
+Waiting for the next checkpoint ...   (2022-05-15 18:48:32.871654)   .................
+Checkpoint models_org/natural/checkpoint-600, evaluating ...   (2022-05-15 18:51:33.163175)
+2022-05-15 18:51:33.166502: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-05-15 18:51:33.166697: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      
+natural: 81.53%
+adversarial: 0.01%
+avg nat loss: 1.1391
+avg adv loss: 3.6666
+Waiting for the next checkpoint ...   (2022-05-15 18:54:47.352452)   ..................
+Checkpoint models_org/natural/checkpoint-900, evaluating ...   (2022-05-15 18:57:57.616002)
+2022-05-15 18:57:57.616777: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-05-15 18:57:57.616839: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      
+natural: 80.47%
+adversarial: 0.87%
+avg nat loss: 1.1425
+avg adv loss: 2.9410
+Waiting for the next checkpoint ...   (2022-05-15 19:01:21.678784)   .................
+Checkpoint models_org/natural/checkpoint-1200, evaluating ...   (2022-05-15 19:04:21.992718)
+2022-05-15 19:04:21.994776: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-05-15 19:04:21.994932: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      
+natural: 78.80%
+adversarial: 9.16%
+avg nat loss: 1.1769
+avg adv loss: 2.5506
+Waiting for the next checkpoint ...   (2022-05-15 19:07:33.782505)   ..................
+Checkpoint models_org/natural/checkpoint-1500, evaluating ...   (2022-05-15 19:10:44.073509)
+2022-05-15 19:10:44.074448: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-05-15 19:10:44.074492: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      
+natural: 73.65%
+adversarial: 15.87%
+avg nat loss: 1.2342
+avg adv loss: 2.3733
+Waiting for the next checkpoint ...   (2022-05-15 19:13:52.492593)   .................
+Checkpoint models_org/natural/checkpoint-1800, evaluating ...   (2022-05-15 19:16:52.764218)
+2022-05-15 19:16:52.765119: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-05-15 19:16:52.765253: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      
+natural: 70.28%
+adversarial: 18.47%
+avg nat loss: 1.2619
+avg adv loss: 2.2926
+Waiting for the next checkpoint ...   (2022-05-15 19:20:03.222978)   .................
+Checkpoint models_org/natural/checkpoint-2100, evaluating ...   (2022-05-15 19:23:03.542195)
+2022-05-15 19:23:03.543536: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-05-15 19:23:03.543592: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      
+natural: 69.84%
+adversarial: 19.62%
+avg nat loss: 1.2475
+avg adv loss: 2.2593
+Waiting for the next checkpoint ...   (2022-05-15 19:26:12.902306)   ..................
+Checkpoint models_org/natural/checkpoint-2400, evaluating ...   (2022-05-15 19:29:23.156160)
+2022-05-15 19:29:23.157293: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-05-15 19:29:23.157350: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      
+natural: 80.14%
+adversarial: 22.90%
+avg nat loss: 1.1486
+avg adv loss: 2.1810
+Waiting for the next checkpoint ...   (2022-05-15 19:32:58.394464)   .................
+Checkpoint models_org/natural/checkpoint-2700, evaluating ...   (2022-05-15 19:35:58.675906)
+2022-05-15 19:35:58.677127: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-05-15 19:35:58.677224: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      
+natural: 71.23%
+adversarial: 26.53%
+avg nat loss: 1.0919
+avg adv loss: 2.1627
+Waiting for the next checkpoint ...   (2022-05-15 19:39:09.395471)   .................
+Checkpoint models_org/natural/checkpoint-3000, evaluating ...   (2022-05-15 19:42:09.668827)
+2022-05-15 19:42:09.669998: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-05-15 19:42:09.670031: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      
+natural: 85.76%
+adversarial: 26.73%
+avg nat loss: 0.9770
+avg adv loss: 2.1042
+Waiting for the next checkpoint ...   (2022-05-15 19:45:43.342806)   ..................
+Checkpoint models_org/natural/checkpoint-3300, evaluating ...   (2022-05-15 19:48:53.602350)
+2022-05-15 19:48:53.604735: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-05-15 19:48:53.604912: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      
+natural: 81.68%
+adversarial: 29.77%
+avg nat loss: 0.9036
+avg adv loss: 2.0589
+Waiting for the next checkpoint ...   (2022-05-15 19:52:03.099520)   ..................
+Checkpoint models_org/natural/checkpoint-3600, evaluating ...   (2022-05-15 19:55:13.408952)
+2022-05-15 19:55:13.410165: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-05-15 19:55:13.410216: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      
+natural: 82.44%
+adversarial: 32.98%
+avg nat loss: 0.8047
+avg adv loss: 1.9877

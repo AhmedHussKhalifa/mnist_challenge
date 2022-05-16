@@ -95,18 +95,33 @@ with tf.Session() as sess:
 
     
     # Compute Adversarial Perturbations
+    
     start = timer()
-    # x_batch_adv = attack_yang.perturb(x_batch)
-
+    # for rep in range(large_num_of_attacks):
+    # x_batch_adv = attack.perturb(x_batch, y_batch, sess)
     x_batch_adv, y_batch = attack_yang.perturb(x_batch, y_batch, large_num_of_attacks)
-    print(np.shape(x_batch_adv)) # (5000, 784)
-    print(np.shape(y_batch)) # (5000)
-    exit(0)
-
-    end = timer()
-    training_time += end - start
     adv_dict = {model.x_input: x_batch_adv,
                 model.y_input: y_batch}
+    
+    # Actual training step
+    sess.run(train_step, feed_dict=adv_dict)
+    
+    end = timer()
+    training_time += end - start
+    
+    y_xent = sess.run(model.y_xent, feed_dict=adv_dict)
+    print("#"*50)
+    print(y_xent)
+    print("#"*50)
+
+
+    # correct_prediction = sess.run(model.correct_prediction, feed_dict=adv_dict)
+    # y_xent = sess.run(model.y_xent, feed_dict=adv_dict)
+    # print(y_pred)
+    # print(y_batch)
+    # print(correct_prediction)
+
+
     adv_acc = sess.run(model.accuracy, feed_dict=adv_dict)
 
     # Output to stdout
@@ -133,8 +148,8 @@ with tf.Session() as sess:
                  os.path.join(model_dir, 'checkpoint'),
                  global_step=global_step)
 
-    # Actual training step
-    start = timer()
-    sess.run(train_step, feed_dict=adv_dict)
-    end = timer()
-    training_time += end - start
+    # # Actual training step
+    # start = timer()
+    # sess.run(train_step, feed_dict=adv_dict)
+    # end = timer()
+    # training_time += end - start
