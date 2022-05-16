@@ -49,22 +49,21 @@ class Model(object):
     self.pre_softmax = tf.matmul(h_fc1, W_fc2) + b_fc2
 
 
-    # y_xent = tf.nn.sparse_softmax_cross_entropy_with_logits(
-    #     labels=self.y_input, logits=self.pre_softmax)
+    y_xent = tf.nn.sparse_softmax_cross_entropy_with_logits(
+                labels=self.y_input, logits=self.pre_softmax)
 
 
-    y_xent = tf.nn.softmax(
-            self.pre_softmax , axis=None, name=None, dim=None
-            )
+    # y_xent = tf.nn.softmax(
+    #         self.pre_softmax , axis=None, name=None, dim=None
+    #         )
 
-    self.y_pred = tf.argmax(y_xent, 1)
 
-    hing = (1 - (self.y_input * self.y_pred))
+    # hing = (1 - (self.y_input * self.y_pred))
 
-    hing_loss = tf.math.maximum(
-                                  hing , 0, name=None
-                                )
-    y_xent = hing_loss
+    # hing_loss = tf.math.maximum(
+    #                               hing , 0, name=None
+    #                             )
+    # y_xent = hing_loss
     # y_xent = tf.nn.hinge_loss(
                                   # labels=self.y_input,
                                   # logits=self.pre_softmax,
@@ -77,7 +76,7 @@ class Model(object):
     # new loss function
     # # loss function 
 
-    # y_xent = tf.math.exp(lamda * y_xent)
+    y_xent = tf.math.exp(lamda * y_xent)
     
     self.y_xent = y_xent
 
@@ -85,6 +84,7 @@ class Model(object):
 
     # self.y_pred = tf.argmax(self.pre_softmax, 1)
 
+    self.y_pred = tf.argmax(self.pre_softmax, 1)
     correct_prediction = tf.equal(self.y_pred, self.y_input)
 
     self.num_correct = tf.reduce_sum(tf.cast(correct_prediction, tf.int64))
