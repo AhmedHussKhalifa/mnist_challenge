@@ -61,36 +61,25 @@ class LinfPGDAttack:
     return x
 
 class YangAttack:
-  def __init__(self,model,  epsilon,k,a, random_start, loss_func):
+  def __init__(self, epsilon):
     """Attack parameter initialization. The attack performs k steps of
        size a, while always staying within epsilon from the initial
        point."""
-    self.model = model
     self.epsilon = epsilon
-    self.k = k
-    self.a = a
-    self.rand = random_start
-  
-    if loss_func == 'xent':
-      loss = model.xent
-    elif loss_func == 'cw':
-      label_mask = tf.one_hot(model.y_input,
-                              10,
-                              on_value=1.0,
-                              off_value=0.0,
-                              dtype=tf.float32)
-      correct_logit = tf.reduce_sum(label_mask * model.pre_softmax, axis=1)
-      wrong_logit = tf.reduce_max((1-label_mask) * model.pre_softmax
-                                  - 1e4*label_mask, axis=1)
-      loss = -tf.nn.relu(correct_logit - wrong_logit + 50)
-    else:
-      print('Unknown loss function. Defaulting to cross-entropy')
-      loss = model.xent
-
-    self.grad = tf.gradients(loss, model.x_input)[0]
 
 
-  def perturb(self, x_nat, y,sess, large_num_of_attacks):
+  def perturb_old(self, x_nat, y_batch, large_num_of_attacks):
+    """Given a set of examples (x_nat, y), returns a set of adversarial
+       examples within epsilon of x_nat in l_infinity norm."""
+    # for rep in range(large_num_of_attacks):
+    # Sagar part
+    x = x_nat + np.random.uniform(-self.epsilon, self.epsilon, x_nat.shape)
+    x = np.clip(x, 0, 1) # ensure valid pixel range
+
+
+    return x, y_batch
+
+  def perturb(self, x_nat, y, large_num_of_attacks):
     # x_res = np.array([])
     # y_res = np.array([])
     x_res =  np.empty((50, 784), int)

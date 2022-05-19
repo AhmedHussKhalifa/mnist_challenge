@@ -9,7 +9,7 @@ import json
 import os
 import shutil
 from timeit import default_timer as timer
-
+import pickle
 import tensorflow as tf
 # import tensorflow.compat.v1 as tf
 
@@ -51,10 +51,7 @@ attack = LinfPGDAttack(model,
                        config['random_start'],
                        config['loss_func'])
 
-model = Model()
-attack_yang = YangAttack(model, config['epsilon'], config['k'],config['a'],
-                       config['random_start'],
-                          config['loss_func'])
+attack_yang = YangAttack(config['epsilon'])
 
 # Setting up the Tensorboard and checkpoint outputs
 model_dir = config['model_dir']
@@ -89,55 +86,75 @@ with tf.Session() as sess:
   sess.run(tf.global_variables_initializer())
   training_time = 0.0
 
-  # Main training loop
+
+  # for ii in range(max_num_training_steps):
   for ii in range(max_num_training_steps):
     x_batch, y_batch = mnist.train.next_batch(batch_size)
 
+
+
+    # Compute Adversarial Perturbations
+
     nat_dict = {model.x_input: x_batch,
                 model.y_input: y_batch}
-
-    
-    # Compute Adversarial Perturbations
     start = timer()
-    # x_batch_adv = attack_yang.perturb(x_batch)
-  
-    x_batch_adv, y_batch = attack_yang.perturb(x_batch, y_batch,sess,  large_num_of_attacks)
-    print(np.shape(x_batch_adv)) # (5000, 784)
-    print(np.shape(y_batch)) # (5000)
-    exit(0)
-
+    # for rep in range(large_num_of_attacks):
+    # x_batch_adv = attack.perturb(x_batch, y_batch, sess)
+    x_batch_adv, y_batch = attack_yang.perturb(x_batch, y_batch, large_num_of_attacks)
     end = timer()
     training_time += end - start
     adv_dict = {model.x_input: x_batch_adv,
                 model.y_input: y_batch}
-    adv_acc = sess.run(model.accuracy, feed_dict=adv_dict)
 
     # Output to stdout
     if ii % num_output_steps == 0:
-      nat_acc = sess.run(model.accuracy, feed_dict=nat_dict)
-      adv_acc = sess.run(model.accuracy, feed_dict=adv_dict)
-      print('Step {}:    ({})'.format(ii, datetime.now()))
-      print('    training nat accuracy {:.4}%'.format(nat_acc * 100))
-      print('    training adv accuracy {:.4}%'.format(adv_acc * 100))
-      
-      if ii != 0:
-        print('    {} examples per second'.format(
-            num_output_steps * batch_size / training_time))
-        training_time = 0.0
-
+        nat_acc = sess.run(model.accuracy, feed_dict=nat_dict)
+        adv_acc = sess.run(model.accuracy, feed_dict=adv_dict)
+        print('Step {}:    ({})'.format(ii, datetime.now()))
+        print('    training nat accuracy {:.4}%'.format(nat_acc * 100))
+        print('    training adv accuracy {:.4}%'.format(adv_acc * 100))
+        if ii != 0:
+            print('    {} examples per second'.format(
+                num_output_steps * batch_size / training_time))
+            training_time = 0.0
     # Tensorboard summaries
     if ii % num_summary_steps == 0:
-      summary = sess.run(merged_summaries, feed_dict=adv_dict)
-      summary_writer.add_summary(summary, global_step.eval(sess))
+        summary = sess.run(merged_summaries, feed_dict=adv_dict)
+        summary_writer.add_summary(summary, global_step.eval(sess))
 
     # Write a checkpoint
     if ii % num_checkpoint_steps == 0:
-      saver.save(sess,
-                 os.path.join(model_dir, 'checkpoint'),
-                 global_step=global_step)
+        saver.save(sess,
+                   os.path.join(model_dir, 'checkpoint'),
+                   global_step=global_step)
 
     # Actual training step
-    start = timer()
     sess.run(train_step, feed_dict=adv_dict)
-    end = timer()
-    training_time += end - start
+
+
+    y_xent = sess.run(model.y_xent, feed_dict=adv_dict)
+    # softmax = sess.run(model.softmax, feed_dict=adv_dict)
+
+    print("#"*50)
+    # print(type(y_xent))
+    # tf.math.reduce_max(
+    print("Before", np.min(y_xent) , np.max(y_xent), np.mean(y_xent))
+    # print("After", np.min(softmax) , np.max(softmax), np.mean(softmax))
+
+
+
+    # avg_softmax.append(np.mean(softmax))
+    # min_softmax.append(np.min(softmax))
+    # min_softmax.append(np.max(softmax))
+
+
+    print("#"*50)
+
+
+    # correct_prediction = sess.run(model.correct_prediction, feed_dict=adv_dict)
+    # y_xent = sess.run(model.y_xent, feed_dict=adv_dict)
+    # print(y_pred)
+    # print(y_batch)
+    # print(correct_prediction)
+
+

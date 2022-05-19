@@ -48,22 +48,34 @@ class Model(object):
 
     self.pre_softmax = tf.matmul(h_fc1, W_fc2) + b_fc2
 
-    # loss function 
-    y_xent = tf.nn.sparse_softmax_cross_entropy_with_logits(
-        labels=self.y_input, logits=self.pre_softmax)
+    
+    self.y_xent = tf.nn.sparse_softmax_cross_entropy_with_logits(
+                labels=self.y_input, logits=self.pre_softmax)
+    self.xent = tf.reduce_sum(self.y_xent)
 
-
-    # new loss function
-    y_xent = tf.math.exp(lamda * y_xent)
-
-    self.xent = tf.reduce_sum(y_xent)
 
     self.y_pred = tf.argmax(self.pre_softmax, 1)
-
     correct_prediction = tf.equal(self.y_pred, self.y_input)
 
     self.num_correct = tf.reduce_sum(tf.cast(correct_prediction, tf.int64))
     self.accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+
+  def multi_class_hinge_loss(self, logits, label, batch_size, n_classes):
+    # get the correct logit
+    flat_logits = tf.reshape(logits, (-1,))
+    correct_id = tf.range(0, batch_size) * n_classes + label
+    correct_logit = tf.gather(flat_logits, correct_id)
+
+    # get the wrong maximum logit
+    max_label = tf.argmax(logits, 1)
+    top2, _ = tf.nn.top_k(logits, k=2, sorted=True)
+    top2 = tf.split(1, 2, top2)
+    for i in xrange(2):
+        top2[i] = tf.reshape(top2[i], (batch_size, ))
+    wrong_max_logit = tf.select(tf.equal(max_label, label), top2[1], top2[0])
+
+    # calculate multi-class hinge loss
+    return tf.math.reduce_mean(tf.maximum(0., 1. + wrong_max_logit - correct_logit))
 
   @staticmethod
   def _weight_variable(shape):
