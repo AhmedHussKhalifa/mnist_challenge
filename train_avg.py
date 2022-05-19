@@ -9,7 +9,7 @@ import json
 import os
 import shutil
 from timeit import default_timer as timer
-
+import pickle
 import tensorflow as tf
 # import tensorflow.compat.v1 as tf
 
@@ -87,7 +87,11 @@ with tf.Session() as sess:
   training_time = 0.0
 
   # Main training loop
-  for ii in range(max_num_training_steps):
+  min_softmax = []
+  max_softmax = []
+  avg_softmax = []
+  # for ii in range(max_num_training_steps):
+  for ii in range(20):
     x_batch, y_batch = mnist.train.next_batch(batch_size)
 
     nat_dict = {model.x_input: x_batch,
@@ -110,8 +114,21 @@ with tf.Session() as sess:
     training_time += end - start
     
     y_xent = sess.run(model.y_xent, feed_dict=adv_dict)
+    # softmax = sess.run(model.softmax, feed_dict=adv_dict)
+
     print("#"*50)
-    print(y_xent)
+    # print(type(y_xent))
+    # tf.math.reduce_max(
+    print("Before", np.min(y_xent) , np.max(y_xent), np.mean(y_xent))
+    # print("After", np.min(softmax) , np.max(softmax), np.mean(softmax))
+
+
+
+    # avg_softmax.append(np.mean(softmax))
+    # min_softmax.append(np.min(softmax))
+    # min_softmax.append(np.max(softmax))
+
+
     print("#"*50)
 
 
@@ -148,6 +165,11 @@ with tf.Session() as sess:
                  os.path.join(model_dir, 'checkpoint'),
                  global_step=global_step)
 
+  # pkl_filename_dir = os.path.join(str(config['lamda'])+".pkl")
+  pkl_filename_dir = str(config['lamda'])+".pkl"
+  all_data = [avg_softmax, max_softmax,  min_softmax]
+  with open(pkl_filename_dir, 'wb') as handle:
+    pickle.dump(all_data)
     # # Actual training step
     # start = timer()
     # sess.run(train_step, feed_dict=adv_dict)

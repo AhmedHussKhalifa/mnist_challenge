@@ -1,4 +1,2 @@
-model_checkpoint_path: "checkpoint-3301"
-all_model_checkpoint_paths: "checkpoint-2701"
-all_model_checkpoint_paths: "checkpoint-3001"
-all_model_checkpoint_paths: "checkpoint-3301"
+model_checkpoint_path: "checkpoint-1"
+all_model_checkpoint_paths: "checkpoint-1"

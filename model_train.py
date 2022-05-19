@@ -49,8 +49,7 @@ class Model(object):
     self.pre_softmax = tf.matmul(h_fc1, W_fc2) + b_fc2
 
 
-    y_xent = tf.nn.sparse_softmax_cross_entropy_with_logits(
-                labels=self.y_input, logits=self.pre_softmax)
+
 
 
     # y_xent = tf.nn.softmax(
@@ -76,9 +75,17 @@ class Model(object):
     # new loss function
     # # loss function 
 
-    y_xent = tf.math.exp(lamda * y_xent)
+    # y_xent = self.pre_softmax
+
     
+    y_xent = tf.nn.sparse_softmax_cross_entropy_with_logits(
+                labels=self.y_input, logits=self.pre_softmax)
+
+    y_xent = tf.math.exp(lamda * y_xent)
+
     self.y_xent = y_xent
+    # self.softmax = y_xent
+    
 
     self.xent = tf.reduce_sum(y_xent)
 
