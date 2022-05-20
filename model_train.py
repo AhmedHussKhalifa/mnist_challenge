@@ -48,7 +48,7 @@ class Model(object):
     W_fc2 = self._weight_variable([1024,10])
     b_fc2 = self._bias_variable([10])
 
-    self.pre_softmax = (tf.matmul(h_fc1, W_fc2) + b_fc2)/1e4
+    self.pre_softmax = (tf.matmul(h_fc1, W_fc2) + b_fc2)
 
 
     # y_xent = tf.nn.softmax(

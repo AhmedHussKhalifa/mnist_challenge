@@ -22,6 +22,6 @@
   "random_start": true,
   "loss_func": "xent",
   "store_adv_path": "attack.npy",
-  "lamda" : 10,
+  "lamda" : 1,
   "large_num_of_attacks": 100
 }

@@ -94,8 +94,11 @@ with tf.Session() as sess:
   min_loss = []
   max_loss = []
   avg_loss = []
+
+  pre_text = "UniformAttack_"+config["large_num_of_attacks"] +"_"
+
   # for ii in range(max_num_training_steps):
-  for ii in range(20):
+  for ii in range(600):
     x_batch, y_batch = mnist.train.next_batch(batch_size)
 
     nat_dict = {model.x_input: x_batch,
@@ -161,8 +164,8 @@ with tf.Session() as sess:
                  global_step=global_step)
 
   # pkl_filename_dir = os.path.join(str(config['lamda'])+".pkl")
-  pkl_after_exp = str(config['lamda'])+"_exp.pkl"
-  pkl_loss = str(config['lamda'])+"_loss.pkl"
+  pkl_after_exp = pre_text + str(config['lamda'])+"_exp.pkl"
+  pkl_loss = pre_text + str(config['lamda'])+"_loss.pkl"
   
   after_expo_data = [avg_after_exp, max_after_exp,  min_after_exp]
   loss            = [avg_loss, max_loss,  min_loss]
