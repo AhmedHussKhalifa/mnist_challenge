@@ -116,20 +116,20 @@ with tf.Session() as sess:
     y_xent = sess.run(model.y_xent, feed_dict=adv_dict)
     # softmax = sess.run(model.softmax, feed_dict=adv_dict)
 
-    print("#"*50)
+    print("#"*20)
     # print(type(y_xent))
     # tf.math.reduce_max(
-    print("Before", np.min(y_xent) , np.max(y_xent), np.mean(y_xent))
+    print("After Expo (min, max, avg) :", np.min(y_xent) , np.max(y_xent), np.mean(y_xent))
     # print("After", np.min(softmax) , np.max(softmax), np.mean(softmax))
 
 
 
-    # avg_softmax.append(np.mean(softmax))
-    # min_softmax.append(np.min(softmax))
-    # min_softmax.append(np.max(softmax))
+    avg_softmax.append(np.mean(y_xent))
+    min_softmax.append(np.min(y_xent))
+    min_softmax.append(np.max(y_xent))
 
 
-    print("#"*50)
+    print("#"*20)
 
 
     # correct_prediction = sess.run(model.correct_prediction, feed_dict=adv_dict)
@@ -167,9 +167,10 @@ with tf.Session() as sess:
 
   # pkl_filename_dir = os.path.join(str(config['lamda'])+".pkl")
   pkl_filename_dir = str(config['lamda'])+".pkl"
+  print(pkl_filename_dir)
   all_data = [avg_softmax, max_softmax,  min_softmax]
   with open(pkl_filename_dir, 'wb') as handle:
-    pickle.dump(all_data)
+    pickle.dump(all_data, handle, protocol=pickle.HIGHEST_PROTOCOL)
     # # Actual training step
     # start = timer()
     # sess.run(train_step, feed_dict=adv_dict)
