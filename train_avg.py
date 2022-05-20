@@ -87,9 +87,13 @@ with tf.Session() as sess:
   training_time = 0.0
 
   # Main training loop
-  min_softmax = []
-  max_softmax = []
-  avg_softmax = []
+  min_after_exp = []
+  max_after_exp = []
+  avg_after_exp = []
+
+  min_loss = []
+  max_loss = []
+  avg_loss = []
   # for ii in range(max_num_training_steps):
   for ii in range(20):
     x_batch, y_batch = mnist.train.next_batch(batch_size)
@@ -114,30 +118,21 @@ with tf.Session() as sess:
     training_time += end - start
     
     y_xent = sess.run(model.y_xent, feed_dict=adv_dict)
-    # softmax = sess.run(model.softmax, feed_dict=adv_dict)
+    loss = sess.run(model.loss, feed_dict=adv_dict)
 
     print("#"*20)
-    # print(type(y_xent))
-    # tf.math.reduce_max(
+    print("Loss (min, max, avg) :", np.min(loss) , np.max(loss), np.mean(loss))
     print("After Expo (min, max, avg) :", np.min(y_xent) , np.max(y_xent), np.mean(y_xent))
-    # print("After", np.min(softmax) , np.max(softmax), np.mean(softmax))
 
+    avg_after_exp.append(np.mean(y_xent))
+    min_after_exp.append(np.min(y_xent))
+    max_after_exp.append(np.max(y_xent))
 
-
-    avg_softmax.append(np.mean(y_xent))
-    min_softmax.append(np.min(y_xent))
-    min_softmax.append(np.max(y_xent))
-
+    avg_loss.append(np.mean(loss))
+    min_loss.append(np.min(loss))
+    max_loss.append(np.max(loss))
 
     print("#"*20)
-
-
-    # correct_prediction = sess.run(model.correct_prediction, feed_dict=adv_dict)
-    # y_xent = sess.run(model.y_xent, feed_dict=adv_dict)
-    # print(y_pred)
-    # print(y_batch)
-    # print(correct_prediction)
-
 
     adv_acc = sess.run(model.accuracy, feed_dict=adv_dict)
 
@@ -166,11 +161,17 @@ with tf.Session() as sess:
                  global_step=global_step)
 
   # pkl_filename_dir = os.path.join(str(config['lamda'])+".pkl")
-  pkl_filename_dir = str(config['lamda'])+".pkl"
-  print(pkl_filename_dir)
-  all_data = [avg_softmax, max_softmax,  min_softmax]
-  with open(pkl_filename_dir, 'wb') as handle:
-    pickle.dump(all_data, handle, protocol=pickle.HIGHEST_PROTOCOL)
+  pkl_after_exp = str(config['lamda'])+"_exp.pkl"
+  pkl_loss = str(config['lamda'])+"_loss.pkl"
+  
+  after_expo_data = [avg_after_exp, max_after_exp,  min_after_exp]
+  loss            = [avg_loss, max_loss,  min_loss]
+
+  with open(pkl_after_exp, 'wb') as handle:
+    pickle.dump(after_expo_data, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+  with open(pkl_loss, 'wb') as handle:
+    pickle.dump(loss, handle, protocol=pickle.HIGHEST_PROTOCOL)
     # # Actual training step
     # start = timer()
     # sess.run(train_step, feed_dict=adv_dict)

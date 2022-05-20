@@ -80,8 +80,8 @@ class Model(object):
     y_xent = tf.nn.sparse_softmax_cross_entropy_with_logits(
                 labels=self.y_input, logits=self.pre_softmax)
 
+    self.loss = y_xent
     y_xent = tf.math.exp(lamda * y_xent)
-
     self.y_xent = y_xent
     # self.softmax = y_xent
     
