@@ -56,8 +56,6 @@ class Model(object):
     self.loss = y_xent
     y_xent = tf.math.exp(lamda * y_xent)
     self.y_xent = y_xent
-    # self.softmax = y_xent
-    
 
     self.xent = tf.reduce_sum(y_xent)
 
