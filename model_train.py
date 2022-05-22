@@ -50,33 +50,6 @@ class Model(object):
 
     self.pre_softmax = (tf.matmul(h_fc1, W_fc2) + b_fc2)
 
-
-    # y_xent = tf.nn.softmax(
-    #         self.pre_softmax , axis=None, name=None, dim=None
-    #         )
-
-
-    # hing = (1 - (self.y_input * self.y_pred))
-
-    # hing_loss = tf.math.maximum(
-    #                               hing , 0, name=None
-    #                             )
-    # y_xent = hing_loss
-    # y_xent = tf.nn.hinge_loss(
-                                  # labels=self.y_input,
-                                  # logits=self.pre_softmax,
-                                  # weights=1.0,
-                                  # scope=None,
-                                  # loss_collection=ops.GraphKeys.LOSSES,
-                                  # reduction=Reduction.SUM_BY_NONZERO_WEIGHTS
-                              # )
-
-    # new loss function
-    # # loss function 
-
-    # y_xent = self.pre_softmax
-
-    
     y_xent = tf.nn.sparse_softmax_cross_entropy_with_logits(
                 labels=self.y_input, logits=self.pre_softmax)
 
