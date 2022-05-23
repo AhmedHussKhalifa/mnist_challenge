@@ -125,8 +125,8 @@ with tf.Session() as sess:
 
     print("#"*20)
     print("Loss (min, max, avg) :", np.min(loss) , np.max(loss), np.mean(loss))
-    print("After Expo (min, max, avg) :", np.min(y_xent) , np.max(y_xent), np.mean(y_xent))
-
+    print("After Expo (min, max, sum) :", np.min(y_xent) , np.max(y_xent), np.sum(y_xent))
+    print("#"*20)
     avg_after_exp.append(np.sum(y_xent))
     min_after_exp.append(np.min(y_xent))
     max_after_exp.append(np.max(y_xent))
@@ -135,7 +135,7 @@ with tf.Session() as sess:
     min_loss.append(np.min(loss))
     max_loss.append(np.max(loss))
 
-    print("#"*20)
+    
 
     adv_acc = sess.run(model.accuracy, feed_dict=adv_dict)
 
