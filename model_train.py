@@ -57,6 +57,9 @@ class Model(object):
     y_xent = tf.math.exp(lamda * y_xent)
     self.y_xent = y_xent
 
+    tmp = 100 * ( self.y_xent - tf.math.reduce_max(self.y_xent))
+    self.y_xent = tf.math.exp(tmp + 5)
+
     self.xent = tf.reduce_sum(y_xent)
 
     # self.y_pred = tf.argmax(self.pre_softmax, 1)

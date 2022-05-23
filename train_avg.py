@@ -95,7 +95,7 @@ with tf.Session() as sess:
   max_loss = []
   avg_loss = []
 
-  pre_text = "UniformAttack_"+config["large_num_of_attacks"] +"_"
+  pre_text = "UniformAttack_"+ str(config["large_num_of_attacks"]) +"_"
 
   # for ii in range(max_num_training_steps):
   for ii in range(600):
