@@ -127,11 +127,11 @@ with tf.Session() as sess:
     print("Loss (min, max, avg) :", np.min(loss) , np.max(loss), np.mean(loss))
     print("After Expo (min, max, avg) :", np.min(y_xent) , np.max(y_xent), np.mean(y_xent))
 
-    avg_after_exp.append(np.mean(y_xent))
+    avg_after_exp.append(np.sum(y_xent))
     min_after_exp.append(np.min(y_xent))
     max_after_exp.append(np.max(y_xent))
 
-    avg_loss.append(np.mean(loss))
+    avg_loss.append(np.sum(loss))
     min_loss.append(np.min(loss))
     max_loss.append(np.max(loss))
 

@@ -50,19 +50,27 @@ class Model(object):
 
     self.pre_softmax = (tf.matmul(h_fc1, W_fc2) + b_fc2)
 
-    y_xent = tf.nn.sparse_softmax_cross_entropy_with_logits(
+    # Shayan Start
+    self.loss=self.pre_softmax
+    self.y_xent = tf.nn.sparse_softmax_cross_entropy_with_logits(
                 labels=self.y_input, logits=self.pre_softmax)
+    self.afterloss=self.y_xent
+    self.y_xent = tf.math.exp(100 * self.y_xent-100*tf.math.reduce_max(self.y_xent)+5)
+    #self.y_xent = (self.y_xent/10)**50
+    self.xent = tf.reduce_sum(self.y_xent)
+    # Shayan End
 
-    self.loss = y_xent
-    y_xent = tf.math.exp(lamda * y_xent)
-    self.y_xent = y_xent
 
-    tmp = 100 * ( self.y_xent - tf.math.reduce_max(self.y_xent))
-    self.y_xent = tf.math.exp(tmp + 5)
+    # # Ahmed Start
+    # y_xent = tf.nn.sparse_softmax_cross_entropy_with_logits(
+    #             labels=self.y_input, logits=self.pre_softmax)
+    # y_xent = ( y_xent - tf.math.reduce_mean(y_xent)) / tf.math.reduce_std(y_xent)
+    # self.loss = y_xent
+    # y_xent = tf.math.exp(lamda * y_xent)
+    # self.y_xent = y_xent
+    # self.xent = tf.reduce_sum(y_xent)
+    # # Ahmed End
 
-    self.xent = tf.reduce_sum(y_xent)
-
-    # self.y_pred = tf.argmax(self.pre_softmax, 1)
 
     self.y_pred = tf.argmax(self.pre_softmax, 1)
     correct_prediction = tf.equal(self.y_pred, self.y_input)
