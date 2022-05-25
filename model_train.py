@@ -44,11 +44,24 @@ class Model(object):
     h_pool2_flat = tf.reshape(h_pool2, [-1, 7 * 7 * 64])
     h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)
 
-    # output layer
+
+    #batch norm
+    batch_mean2, batch_var2 = tf.nn.moments(h_fc1, [0])
+    scale2 = tf.Variable(tf.ones([1024]))
+    beta2 = tf.Variable(tf.zeros([1024]))
+    batch_norm = tf.nn.batch_normalization(h_fc1,batch_mean2,batch_var2,beta2,scale2,0.3)
+    batch_norm_sig  = tf.nn.sigmoid(batch_norm)
+
+    # output layer + batch 
     W_fc2 = self._weight_variable([1024,10])
     b_fc2 = self._bias_variable([10])
+    self.pre_softmax = tf.matmul(batch_norm_sig, W_fc2) + b_fc2
 
-    self.pre_softmax = (tf.matmul(h_fc1, W_fc2) + b_fc2)
+    # # output layer
+    # W_fc2 = self._weight_variable([1024,10])
+    # b_fc2 = self._bias_variable([10])
+
+    # self.pre_softmax = (tf.matmul(h_fc1, W_fc2) + b_fc2)
 
     # Shayan Start
     # self.loss=self.pre_softmax
@@ -64,8 +77,10 @@ class Model(object):
     y_xent = tf.nn.sparse_softmax_cross_entropy_with_logits(
                 labels=self.y_input, logits=self.pre_softmax)
     
+    # normalization shayan
+    # y_xent = ( y_xent - tf.math.reduce_max(y_xent)) / tf.math.reduce_std(y_xent)**2
     
-    y_xent = ( y_xent - tf.math.reduce_max(y_xent)) / tf.math.reduce_std(y_xent)**2
+
     self.loss = y_xent
     y_xent = tf.math.exp(lamda * y_xent)
     self.y_xent = y_xent
